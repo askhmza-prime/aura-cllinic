@@ -515,4 +515,88 @@ function AppointmentForm() {
               <span className="italic text-[#D4AF37]">Appointment</span>
             </h2>
             <p className="text-white/50 text-sm leading-relaxed mb-8">
-              Fill o
+              Fill out the form and our team will call you back within a few hours to confirm your appointment.
+            </p>
+            <a href="tel:+919924933999" className="flex items-center gap-4 group mb-8">
+              <div className="w-11 h-11 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-white transition-colors">
+                <Phone className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-[10px] text-white/40 tracking-widest uppercase">Call Us</div>
+                <div className="text-white font-medium">+91 99249 33999</div>
+              </div>
+            </a>
+            <div className="border border-white/10 p-5">
+              <div className="text-[10px] tracking-[0.25em] uppercase text-[#D4AF37] mb-3">Clinic Hours</div>
+              <div className="space-y-1.5 text-sm text-white/60">
+                <div className="flex justify-between">
+                  <span>Monday – Saturday</span>
+                  <span className="text-white/80">10:00 AM – 7:00 PM</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Sunday</span>
+                  <span className="text-white/80">By Appointment</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white p-8 md:p-10">
+            {success ? (
+              <div className="text-center py-10">
+                <CheckCircle2 className="w-14 h-14 text-[#D4AF37] mx-auto mb-4" />
+                <h3 className="font-display text-2xl font-medium mb-2">Request Received!</h3>
+                <p className="text-[#777777] text-sm">Thank you. Our team will call you within a few hours to confirm your appointment.</p>
+                <button onClick={() => setSuccess(false)} className="mt-6 text-[#D4AF37] text-xs tracking-widest uppercase underline">
+                  Book Another
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-[#888888] mb-1.5">Full Name *</label>
+                  <input type="text" value={form.full_name} onChange={(e) => setForm({ ...form, full_name: e.target.value })} placeholder="Your full name" className="w-full border border-[#E8E0D0] px-4 py-3 text-sm text-[#333333] placeholder:text-[#BBBBBB] focus:outline-none focus:border-[#D4AF37] transition-colors" />
+                </div>
+                <div>
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-[#888888] mb-1.5">Phone Number *</label>
+                  <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="+91 XXXXX XXXXX" className="w-full border border-[#E8E0D0] px-4 py-3 text-sm text-[#333333] placeholder:text-[#BBBBBB] focus:outline-none focus:border-[#D4AF37] transition-colors" />
+                </div>
+                <div>
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-[#888888] mb-1.5">Service Interested In</label>
+                  <select value={form.service_interested} onChange={(e) => setForm({ ...form, service_interested: e.target.value })} className="w-full border border-[#E8E0D0] px-4 py-3 text-sm text-[#333333] focus:outline-none focus:border-[#D4AF37] transition-colors bg-white appearance-none">
+                    <option value="">Select a service</option>
+                    {services.map((s) => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[10px] tracking-[0.2em] uppercase text-[#888888] mb-1.5">Message (Optional)</label>
+                  <textarea rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Any specific concerns or questions..." className="w-full border border-[#E8E0D0] px-4 py-3 text-sm text-[#333333] placeholder:text-[#BBBBBB] focus:outline-none focus:border-[#D4AF37] transition-colors resize-none" />
+                </div>
+                {error && <p className="text-red-500 text-xs">{error}</p>}
+                <button type="submit" disabled={loading} className="w-full btn-gold justify-center disabled:opacity-60 disabled:cursor-not-allowed">
+                  {loading ? "Sending..." : "Request Appointment"}
+                </button>
+                <p className="text-[10px] text-[#AAAAAA] text-center">Your information is private and secure.</p>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <TrustSignals />
+      <FeaturedTreatments />
+      <DoctorsSection />
+      <BeforeAfterPreview />
+      <ReviewsStrip />
+      <FAQSection />
+      <AppointmentForm />
+    </>
+  );
+}
